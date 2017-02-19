@@ -1,0 +1,27 @@
+--------------------------------------------------------------------------------
+                       Notes from reading Whitehill's program
+--------------------------------------------------------------------------------
+Copyright (C) 2011 Peng Dai
+
+
+Main functions for the program
+
+void EStep (Dataset *data): the expectation step of the EM algorithm
+
+The function computes the posterior probability of the label (1 or 0) of each image. First, it adds the log-likelihood of the prior. Then it adds the log likelihood of each label given the label is 1 or 0. After the summation, it normalize the potential to a probability (i.e., for each j, meaning an image data->probZ1[j] + data->probZ0[j] = 0 ).
+
+void MStep (Dataset *data): the maximization step of the EM algorithm
+
+The function performs a maximization operation of the unobserved data. Three main functions called:
+1. double my_f (const gsl_vector *x, void *params). Tells the optimization software the parameters to manipulate, and the minimization function "- computeQ(data)" (see below).
+2. void my_df (const gsl_vector *x, void *params, gsl_vector *g). Computes the gradients of the targeted optimization function. See below "gradientQ"
+3. void my_fdf (const gsl_vector *x, void *params, double *f, gsl_vector *g). Does book-keeping -- skip
+
+double computeQ (Dataset *data)
+
+This function calculates the posterior probabilities of true label of an image being 1 or 0, given (1) the workers' labels and (2) the current values of the (unknown) parameters, i.e., alphas and betas. NOTE: the program uses exp(beta) to represent the beta in the paper!
+
+void gradientQ (Dataset *data, double *dQdAlpha, double *dQdBeta)
+
+This function computes the gradient of the conditional probability function. Note that as exp(beta) was used to represent beta in the paper, the gradient of beta contains an extra exponential term (exp(data->beta[j]) compared to the gradient of alpha.
+

@@ -1,0 +1,28 @@
+Octopus License Agreement
+ 
+Octopus Software
+(C) 2015-2017, Indian Institute of Technology - Delhi.  All rights reserved.
+
+The Indian Institute of Technology (IIT-Delhi) and Professor Mausam, Karan Goel, and Shreya Rajpal (Developers), give permission for you to use Octopus. Octopus is a system for performing 3-way optimization in crowdsourcing. Octopus is protected by a United States copyright. 
+
+IIT-Delhi and its Developers grant you the right to perform, copy, and modify Octopus for non-commercial purposes on the following conditions:
+
+1.  Octopus is not used for any commercial purposes, or as part of a system which has commercial purposes.
+
+2.  You may not distribute or publish Octopus or any modification to Octopus so as to make it available to any third party.
+ 
+If you wish to obtain Octopus software for any commercial purposes, you will need to contact the authors to see if rights are available and to negotiate a commercial license and pay a fee. This includes, but is not limited to, using Octopus to provide services to outside parties for a fee. In that case please contact Prof. Mausam at the Indian Institute of Technology - Delhi.
+
+3. You retain in Octopus and any modifications to Octopus, the copyright, trademark, patent or other notices pertaining to Octopus as provided by IIT-Delhi.
+
+4. You provide the Developers with feedback on the use of the Octopus software in your research, and the developers and IIT-Delhi are permitted to use any information you provide in making changes to the Octopus software. All bug reports and technical questions shall be sent to: kgoel [at] andrew [dot] cmu [dot] edu.
+
+5. You acknowledge that the Developers, IIT-Delhi and its licensees may develop modifications to Octopus that may be substantially similar to your modifications of Octopus, and that the Developers, IIT-Delhi and its licensees shall not be constrained in any way by you in IIT-Delhi's or its licensees' use or management of such modifications. You acknowledge the right of the Developers and IIT-Delhi to prepare and publish modifications to Octopus that may be substantially similar or functionally equivalent to your modifications and improvements, and if you obtain patent protection for any modification or improvement to Octopus you agree not to allege or enjoin infringement of your patent by the Developers, the IIT-Delhi or by any of IIT-Delhi's licensees obtaining modifications or improvements to Octopus from the Indian Institute of Technology - Delhi or the Developers.
+
+6. If utilization of the Octopus software results in outcomes which will be published, please specify the version of Octopus you used and cite the IIT-Delhi Developers.
+
+7. Any risk associated with using the Octopus software at your organization is with you and your organization. Octopus is experimental in nature and is made available as a research courtesy "AS IS," without obligation by IIT-Delhi to provide accompanying services or support.
+
+8. IIT-Delhi AND THE AUTHORS EXPRESSLY DISCLAIM ANY AND ALL WARRANTIES REGARDING THE SOFTWARE, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES  PERTAINING TO MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+

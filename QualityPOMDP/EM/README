@@ -1,0 +1,119 @@
+--------------------------------------------------------------------------------
+                       Optimal Label Inference Software
+--------------------------------------------------------------------------------
+Copyright (C) 2009 Jacob Whitehill.
+Machine Perception Laboratory
+University of California San Diego
+
+PLEASE SEE THE LICENSE FILE.
+
+Please use the following reference for citation of work that benefits from use of any portion of 
+the Optimal Label Inference Software:
+
+@inproceedings{WhitehillEtAl2009NIPS,
+	author = "Jacob Whitehill and Paul Ruvolo and Jacob Bergsma and Tingfan Wu and Javier Movellan",
+	title = "Whose Vote Should Count More: Optimal Integration of Labels from Labelers of Unknown Expertise",
+	booktitle = "Advances in Neural Information Processing Systems",
+	year = 2009
+}
+
+For questions and comments, email Jacob Whitehill at:  jake@mplab.ucsd.edu
+
+INSTALLATION INSTRUCTIONS
+-------------------------
+1. Install GSL, if not already installed.
+2. Modify Makefile to point to the locations of the GSL and (contained within
+it) CBLAS libraries and header files. If you do not have Matlab installed or do
+not want to compile the Mex interface, then comment out the corresponding line.
+3. Run make.
+4. You may have to set LD_LIBRARY_PATH or DYLD_LIBRARY_PATH to point to 
+the GSL and CBLAS libraries.
+5. Run the demo (matlab_demo.m).
+
+USAGE INSTRUCTIONS FOR MATLAB
+-----------------------------
+The Matlab interface is probably the easiest to use.
+I wrote a wrapper function "em.m" for the Mex function. The interface is
+as follows:
+
+[ imageStats, labelerStats ] = ...
+  em (imageIds, labelerIds, labels, priorZ1, priorAlpha, priorBeta)
+
+Inputs:
+
+imageIds, labelerIds, and labels are parallel arrays. For each image,
+labeler, label combination, an entry should exist in each of those vectors.
+
+imageIds should uniquely identify each image as a number. labelerIds should
+uniquely identify each labeler and can be strings or numbers. labels should be
+either 0 or 1.
+
+priorZ1 specifies the prior probability p(Z=1). It should be in (0,1), i.e.,
+can be close to, but not equal to, 0 or 1! You may specify a different p(Z=1) for
+each image, or just one value which applies to all images.
+
+priorAlpha specifies the mean of the prior distribution for alpha.
+priorBeta specifies the mean of the prior distribution of log(beta).
+(See the note in the NIPS paper about re-parameterizing beta as beta'.)
+There is once such entry for each labeler (for the alpha) and each image (for
+the beta). At present I do not have an interface to specify the variance, but
+this shouldn't be hard to change if you wish to modify the code.
+
+Outputs:
+
+imageStats contains three parallel arrays in three columns: the first is the
+set of unique image IDs. The second contains the posterior probabilities
+p(Z | L) for each image given the labels. The third contains the values of the
+betas (image difficulties) arrived at by the last iteration of EM.
+
+labelerStats contains two parallel arrays in two columns: the first is the set
+of unique labeler IDs. The second contains the alpha values arrived at by the
+last iteration of EM.
+
+USAGE INSTRUCTIONS FOR C
+------------------------
+For people who don't have or don't want to use Matlab, I also wrote a
+standalone C interface. Run the "em" program on a specified data file, e.g:
+
+  ./em data.txt
+
+where the data file must adhere to the following format:
+
+First line:
+  <numGivenLabels> <numLabelers> <numImages> <Prior p(Z=1)>
+Following <numGivenLabels> lines:
+  <imageId> <labelerId> <0|1>
+
+For our new model, the data file must adhere to the following format:
+First line:
+  <numGivenLabels> <numLabelers> <numImages> <numWorkflows> <Prior p(Z=1)>
+Following <numGivenLabels> lines:
+  <imageId> <labelerId> <workflowId> <0|1>
+
+
+The image IDs must be integers and must be 0...<numImages-1>.
+The labeler IDs must be integers and must be 0...<numLabelers-1>.
+
+In addition, the priors on alpha and beta are fixed to have mean 1 and
+standard deviation 1. Hence, the C interface is less flexible than the Matlab
+one (but it's not hard to change the code -- just search for priorAlpha
+and priorBeta in the C source files).
+
+DEMONSTRATION CODE
+------------------
+I wrote a demo for the Matlab interface called "matlab_demo.m". Just run
+"matlab_demo" at the Matlab prompt.
+
+In addition to outputting its own results, the Matlab demo also writes a file
+called data.txt which can be fed into the C interface. Run
+
+  ./em data.txt
+
+after running matlab_demo.m to see the results. It will output the
+posterior probabilities of Z given the labels as well as the estimates of
+alpha (for each labeler) and beta (for each image) attained at the last
+EM iteration.
+
+Finally, I wrote another demo, "clamp_demo.m", which demonstrates the idea
+of "clamping" certain images to ground-truth values if these are known.
+See our NIPS paper for what we mean by "clamping".
